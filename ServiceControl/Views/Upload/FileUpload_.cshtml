@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="">
+    <h2>File Upload</h2>
+</div>
+<div class="row">
+    @using (Html.BeginForm("FileUpload_", "Upload", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+    {
+        <div class="col-lg-6">
+            <div class="form-inline">
+                <div class="input-group">
+                    @*<div class="form-group">*@
+                        <span class="input input-group">
+                            <input type="file" name="file" class="file_import"/>
+                        </span>
+                    @*</div>*@
+                    <button type="submit" id="btnFileUpload" name="command" value="FileUpload" class="btn btn-info">
+                        <span class="glyphicon glyphicon-upload"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-lg-6 col-sm-6 col-12">
+                <h4>Input Groups</h4>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="btn btn-primary btn-file">
+                            Browse&hellip; <input type="file" multiple>
+                        </span>
+                    </span>
+                    <input type="text" class="form-control" readonly>
+                </div>
+                <span class="help-block">
+                    Try selecting one or more files and watch the feedback
+                </span>
+            </div>*@
+    }
+</div>

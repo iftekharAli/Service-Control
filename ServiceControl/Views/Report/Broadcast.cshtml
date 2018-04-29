@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Operator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/grid-0.4.5.min.css" rel="stylesheet" type="text/css">
+</div>
+<div class="container fill">
+    <div class="row">
+        <div id="divRobi" class=" col-xs-6">
+            @Html.Partial("~/Views/Report/RobiBroadcastStatus_.cshtml")
+        </div>
+        <div id="divBL" class=" col-xs-6">
+            @Html.Partial("~/Views/Report/BlinkBroadcastStatus_.cshtml")
+        </div>
+    </div>
+    <div class="row">
+        <div id="divGP" class=" col-xs-6">
+            @Html.Partial("~/Views/Report/BroadcastStatusGP_.cshtml")
+        </div>
+        <div id="divTeleTalk" class=" col-xs-6">
+            @Html.Partial("~/Views/Report/BroadcastStatusTT_.cshtml")
+        </div>
+    </div>
+</div>

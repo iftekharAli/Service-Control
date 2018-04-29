@@ -1,0 +1,97 @@
+﻿@model ServiceControl.Models.DropDownListModel
+@{
+    ViewBag.Title = "ChargingStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Charging Status</h2>
+
+<script src="~/Scripts/jquery-2.1.3.min.js" type="text/javascript"></script>
+<script src="~/Scripts/moment.min.js"></script>
+
+<script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+<script src="~/Scripts/grid-0.4.5.min.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    var grid;
+
+    //window.setInterval(AutoReloadGP, 3000);
+    function Search() {
+        grid.reload({ searchString: $("#search").val() });
+    }
+
+    $(document).ready(function () {
+        grid = $("#gvAirtel1").grid({
+            dataKey: "ExcelFileName",
+            uiLibrary: "bootstrap",
+            columns: [
+                { field: "ContentDate", sortable: true, width: 10 },
+                { field: "TextLen", sortable: true, width: 15 },
+                { field: "ContentText", sortable: true, width: 85 },
+                { field: "UploadStatus", sortable: true, width: 15 }
+            ],
+            pager: { enable: true, limit: 10, sizes: [2, 5, 10, 20] }
+
+        });
+        $("#btnSearch").on("click", Search);
+    });
+   
+   
+</script>
+
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("btnExport", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @*<input type="file" name="file" />
+                <button type="submit" id="btnFileUpload" name="command" value="FileUpload">Upload</button>*@
+
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(M => M.SheetID, new SelectList(Model.MobileList, "Value", "Text"), "Select...", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                alert('Hello');
+                                $('#datetimepicker1').data("DateTimePicker").FUNCTION()
+                                $('#datetimepicker1').datetimepicker();
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" id="btnGridload" name="command" value="GridLoad">Load</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <input type="text" id="search" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button type="button" id="btnSearch" class="btn btn-info">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="gvAirtel1" data-source="@Url.Action("GetUploadedContent")"></table>
+        </div>
+    </div>
+</div>
